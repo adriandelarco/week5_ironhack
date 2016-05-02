@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>jquery Exercise</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.23/css/bulma.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<div><h1 class="title is-1 has-text-centered">jQuery exercise</h1></div>
+		<br>
+		<div class="row">
+			<h2 class = "div-phrase subtitle is-3 	has-text-centered "></h2>
+			<button style ="margin: 0 auto; display: block" class="button btn-toogle-phrases has-text-centered">Toogle phrases</button>
+		</div>
+		<div>
+			<form class="form-phrase" action="/">
+				<label class="label">Name</label>
+				<p class="control">
+				  <input class="input" type="text" placeholder="Text input">
+				</p>
+			</form>
+			<div>
+				<a class="a-hide-show"href="/">Show phrases</a>
+				<ul class="ul-phrases"></ul>
+				<ul class="ul-phrases-2"><li style="color:green"></li></ul>
+			</div>
+		</div>
+	</div>
+	<script>
+		
+		$(function(){
+
+			var phrases = ['Ola k ase', 'Tabamo tomando ahi tranquilamente en la jurisdiccion del surtidor', 'El que te focka, el que te parte la boca', 'This is the jungle nigga'];
+			var selected_phrase_id = 0
+
+			var show_random_phrase = function (phrases, where) {
+				highlight(false);
+				selected_phrase_id = parseInt(Math.random()*(phrases.length));	
+				where.text(phrases[selected_phrase_id]);
+				highlight(true);
+			}
+
+			var load_list_phrases = function () {
+				$('.ul-phrases li').remove()
+				$.each(phrases, function(index, val) {
+					$('.ul-phrases').append('<li>' + val + ' <i class="delete-icon fa fa-times" aria-hidden="true" id="' + index + '"></i></li>')
+				}
+			)};
+
+			var hide_phrases = function () {
+				$('.ul-phrases').toggle();
+			}
+
+			var highlight = function (activated) {
+				var selector_li = $('.ul-phrases li').eq(selected_phrase_id)
+				if (activated == true) {
+					selector_li.addClass('hero is-primary')
+				} else {
+					selector_li.removeClass('hero is-primary');
+				}
+			}
+
+			load_list_phrases();
+			show_random_phrase(phrases, $('.div-phrase'), phrases.length);
+			hide_phrases();
+
+			$('.btn-toogle-phrases').on('click', function () {
+				show_random_phrase(phrases, $('.div-phrase'), phrases.length);
+			})
+
+			$('.form-phrase').on('submit', function (event) {
+				event.preventDefault();
+				phrases.push($('.form-phrase input').val());
+				load_list_phrases();
+				$('.form-phrase input').val('')
+			})
+
+			$('.a-hide-show').click('click', function (event) {
+				event.preventDefault();
+				hide_phrases();
+				var ahideshow_text = $('.a-hide-show').text()
+				$('.a-hide-show').text(ahideshow_text == "Hide phrases" ? "Show phrases" : "Hide phrases");
+			})
+
+			$(document).delegate('.delete-icon', 'click', function () {
+				var phrase_id = parseInt($(this).attr("id"));
+				phrases.splice(phrase_id, 1)
+				load_list_phrases();
+			});
+
+			$('.input').keyup( function () {
+				$('.ul-phrases-2 li:last-child').text($('.input').val())
+			});
+
+
+
+		});
+	</script>
+</body>
+</html>

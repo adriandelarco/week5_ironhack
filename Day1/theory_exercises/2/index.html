@@ -1,0 +1,43 @@
+<html>
+  <head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+<body>
+ <form id="form1" action="/create">
+  <input type="text" name="name">
+  <input id ="2" type="text" name="lastname">
+  <button type="submit">
+ </form>
+  <h1>sdf</h1>
+ </div>
+ <script>
+   //$('#form1').submit(function (event) {
+    //  var has_empty = false;
+     // $(this).find('input[type!="hidden"]').each(function () {
+     //     if ( ! $(this).val() ) { has_empty = true; return false; }
+     //  });
+     //  debugger
+      // if ( has_empty ) { return event.preventDefault(); }
+   //})
+   $(function(){ //El codigo dentro de una función anónima en jquery carga cuando se carga la web
+      $('#form1').on('submit', function (event) {
+         event.preventDefault();
+         var isNotFilled=false;
+         $('input').each(function(index, item){
+            if ($(item).val() === ""){
+                isNotFilled = true
+            }
+         })
+         console.log(isNotFilled)
+      })
+   })
+ </script>
+</body>
+</html>
+
+var childrens = $(this).find('input')
+var hasEmptyValue = $.makeARray($(childrens)).reduce(function(result,item){
+    return $(item).val === '' && result;
+}, true);
+
+console.log(hasEmptyValue)
