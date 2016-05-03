@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<button class="js-go-button">Go!</button>
+	<script>
+
+		// COMO FUNCION AJAX CON JAVASCRIPT:
+
+		document.querySelector('.js-go-button').onclick = fetchCharacters; //se llama a la función
+
+		function fetchCharacters () {
+			 var HttpRequest = new XMLHttpRequest(); //crear el objeto de petición 
+			 HttpRequest.onreadystatechange = handleResponse; //define qué función que se ejecuta cuando se termina de ejecutar la petición
+			 HttpRequest.open('GET', 'https://ironhack-characters.herokuapp.com/characters') //crea la petición
+			 HttpRequest.send(); //envía la petición
+		}	
+
+		function handleResponse (response) { //funcion que se ejecuta al terminar la petición
+			console.log(response);
+		}
+	</script>
+</body>
+</html>

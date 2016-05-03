@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<button class="js-go-button">Go!</button>
+	<script>
+
+		// COMO FUNCION AJAX CON JAVASCRIPT:
+
+		var url = 'https://ironhack-characters.herokuapp.com/characters'
+		document.querySelector('.js-go-button').onclick = getJson(url, function(characters){console.log(characters)}); //se llama a la función XXX
+
+		// podemos encapsular así la función que realiza la petición AJAX
+		function getJSON(url, callback, failure) {  //le pasamos argumentos para que sea genérica y reutilizable
+			// tiene que devolver una función para el callback en el evento onclick
+			
+			return function () { //funcionXXX
+				 var HttpRequest = new XMLHttpRequest(); //crear el objeto de petición 
+				 HttpRequest.onreadystatechange =  handleResponse; //define qué función que se ejecuta cuando se termina de ejecutar la petición
+				 HttpRequest.open('GET', url) //crea la petición
+				 HttpRequest.send(); //envía la petición
+
+				 function handleResponse (response) { //response es la respuesta, ajax la llama así "response"
+				 	if (HttpRequest.readyState === 4) { //Cuando el callback se llama con readyState4 es que hemos recibido respuesta
+				 		if (HttpRequest.status === 200) {  //Qué respuesta recibimos del servidor donde realizamos petición
+				 			callback(JSON.parse(HttpRequest.responseText))  //parsea la respuesta del server 
+				 			//callback es function(characters){console.log(characters)} - Y characherts pasa a ser JSON.parse(HttpRequest.responseText)
+				 			// por lo tanto, esto devuelve console.log(JSON.parse(HttpRequest.responseText))
+				 		} else{
+				 			failure();
+				 		};
+				 	};
+				 }		 
+			}
+		}
+
+		function fetchCharacters () {
+			 
+
+		}	
+
+	</script>
+</body>
+</html>

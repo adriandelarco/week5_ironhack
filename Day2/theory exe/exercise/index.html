@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>API request</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="https://decorator.io/tools/modulr.min.css"> 
+</head>
+<body>
+	<div class="wrapper960" style="margin:0 auto">
+		<div class="row padding-10 label blue"><h1 style="color: white!important">API request using AJAX</h1></div>
+		<div class="row padding-10">
+			<h3><small>Add new user</small></h3>
+			<form class="form l info" style="padding: 15px; border: 1px solid #d3d3d3; margin-bottom: 10px;"action="">
+			  <div class="col-12">
+			    <label class="text600">Name <span class="require">*</span></label>
+			    <div class="addon-prepend">
+			      <span class="prepend btn"><i class="fa fa-user"></i></span>
+			      <input type="text" class="name" placeholder="name"/>
+			    </div>
+			  </div>
+			  <div class="col-12">
+			    <label class="text600">occupation <span class="require">*</span></label>
+			    <div class="addon-prepend">
+			      <span class="prepend btn"><i class="fa fa-user"></i></span>
+			      <input type="text" class="occupation" placeholder="occupation"/>
+			    </div>
+			  </div>
+			  <div class="col-12">
+			    <label class="text600">weapon <span class="require">*</span></label>
+			    <div class="addon-prepend">
+			      <span class="prepend btn"><i class="fa fa-user"></i></span>
+			      <input type="text" class="weapon" placeholder="weapon"/>
+			    </div>
+			  </div>
+				<input type="submit" class="add-button btn green width-100">
+			</form>
+		</div>
+		<div class="row padding-10">
+			<table class="bordered border-blue border-2 text-strong">
+			  <thead class="fill-blue text-white">
+			    <tr>
+			      <th>Name</th>
+			      <th>Occupation</th>
+			      <th>Weapon</th>
+			    </tr>
+			  </thead>
+			  <tbody class="api-list">
+			  </tbody>
+			</table>
+		</div>
+	</ul>
+	</div>
+	<script>
+
+		get_users();
+
+		$('.add-button').on('click', function (event){
+			event.preventDefault();
+			var name = $('.name').val();
+			var occupation = $('.occupation').val();
+			var weapon = $('.weapon').val();
+			var user = {
+				name: name,
+				occupation: occupation,
+				weapon: weapon
+			}
+			$.post('https://ironhack-characters.herokuapp.com/characters', user)
+			get_users()
+		});
+
+		function get_users() {
+			$.get('https://ironhack-characters.herokuapp.com/characters', handleCharacters)
+			function handleCharacters (characters) {
+				$('.api-list tr').remove()
+				characters.reverse().forEach(function appendLi (chr){
+					$('.api-list').append('<tr></tr>');
+					var html = '<td>' + chr.name + '</td><td>' + chr.occupation + '</td><td>' + chr.weapon + '</td>';
+					$('.api-list tr:last-child').append(html);
+				});
+			}
+		}
+
+	</script>
+
+
+</body>
+</html>
+
+

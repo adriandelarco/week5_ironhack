@@ -36,7 +36,7 @@
 </html>
 
 var childrens = $(this).find('input')
-var hasEmptyValue = $.makeARray($(childrens)).reduce(function(result,item){
+var hasEmptyValue = $.makeARray(childrens).reduce(function(result,item){
     return $(item).val === '' && result;
 }, true);
 
