@@ -3,7 +3,7 @@ $(function(){
 		event.preventDefault();
 		get_artists($('#artist-input').val());
 	});
-	$(document).delegate('img', 'click', function () {
+	$( '.artists' ).on( "click", "img", function () {
 		var artist_id = $(this).attr("id");
 		var artist_name = $(this).attr("alt");
 		var pre_url = "https://api.spotify.com/v1/artists/"
@@ -11,7 +11,7 @@ $(function(){
 		getSomething('album', artist_id, artist_name, pre_url, post_url)
 		$('#myModal').modal('show')
 	});
-	$(document).delegate('.album-button', 'click', function () {
+	$( '.modal-list' ).on( "click", ".album-button", function () {
 		var album_id = $(this).attr("id");
 		var album_name = $(this).text();
 		var pre_url =  "https://api.spotify.com/v1/albums/"
@@ -20,6 +20,7 @@ $(function(){
 		$('#myModal').modal('show')
 	})
 });
+
 function get_artists(keyword) {
 	$('.artists .artist').remove();
 	var url = "https://api.spotify.com/v1/search?type=artist&query="
@@ -44,11 +45,11 @@ function getSomething(something_type, something_id, something_name, pre_url, pos
 	$.get((pre_url+something_id+post_url), printSomething);
 	function printSomething (somethings) {
 		somethings.items.forEach(function (something){
-			appendSomething(something_type, something);
+			appendSomethingInModal(something_type, something);
 		});
 	}
 }
-function appendSomething (something_type, something){
+function appendSomethingInModal (something_type, something){
 	$('.modal-list').append('<button type="button" class="'+something_type+'-button list-group-item" id="'+something.id+'">'+something.name+'</button>');
 	if (something_type === "track") {
 		$('.modal-list button:last-child').append('<audio controls><source src="'+something.preview_url+'" type="audio/ogg"></audio>')
