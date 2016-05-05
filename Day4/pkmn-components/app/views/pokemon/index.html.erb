@@ -1,0 +1,81 @@
+<h1>Pokédex</h1>
+
+<!-- List of pokemon -->
+<ul class="pokedex-list">
+  <% @pokemon.each do |pkmn| %>
+    <li>
+      <button class="js-show-pokemon btn btn-link"
+          data-pokemon-uri="<%= pkmn["resource_uri"] %>">
+        <%= pkmn["name"] %>
+      </button>
+    </li>
+  <% end %>
+</ul>
+
+<!-- Pokemon modal view (hidden at first) -->
+<div class="modal fade js-pokemon-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+
+        <h3 class="modal-title">
+          <span class="js-pkmn-name">Unknown</span>
+          <small class="js-pkmn-number">#Unknown</small>
+        </h3>
+      </div><!-- .modal-header -->
+
+      <div class="modal-body">
+        <dl class="dl-horizontal">
+          <img class="js-pkmn-img" src="" alt="">
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Height</dt>
+          <dd class="js-pkmn-height">Unknown</dd>
+          <dt>Weight</dt>
+          <dd class="js-pkmn-weight">Unknown</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Description</dt>
+          <dd class="js-pkmn-description">Unknown</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt></dt>
+          <button class="js-pkmn-evolution hidden btn btn-link" data-evolution-uri="">Show evolutions
+          </button>
+        </dl>
+      </div><!-- .modal-body -->
+
+    </div><!-- .modal-content -->
+  </div><!-- .modal-dialog -->
+</div><!-- .modal -->
+
+<!-- Pokemon modal view (hidden at first) -->
+<div class="modal fade js-evolution-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+
+        <h3 class="modal-title">
+          <span class="js-evolution-title">Evolutions</span>
+          <small class="js-evolution-name">-</small>
+        </h3>
+      </div><!-- .modal-header -->
+
+      <div class="modal-body">
+        <dl class="dl-horizontal-evolutions">
+          <div class="div-evolutions clearfix">
+          </div>
+        </dl>
+      </div><!-- .modal-body -->
+
+    </div><!-- .modal-content -->
+  </div><!-- .modal-dialog -->
+</div><!-- .modal -->
