@@ -1,0 +1,86 @@
+<html>
+<head>
+	<title></title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.20/dist/jquery.flip.min.js"></script>
+	<link rel="stylesheet" href="https://decorator.io/tools/modulr.min.css"> 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+		<!-- bxSlider Javascript file -->
+	<script src="lib/jquery.bxslider.min.js"></script>
+	<!-- bxSlider CSS file -->
+	<link href="lib/jquery.bxslider.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="spotify wrapper960 padding-10 center">
+		<header>
+			<a href="/"><img class="logo" src="logo.png" alt=""></a>
+		</header>
+		<div class="search-form margin-bottom">
+			<form class="song-form form icon-right border silver">
+			  <input class="input-song round" type="text" placeholder="search for a song">
+			  <button type="submit"></button>
+			</form>
+		</div>
+		<main class="hidden">
+			<div class="col-4 section-song">
+				<div class="widget">
+					<div class="cover hidden" id="card">
+						<div class="front"> 
+							<img class="img-cover" src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43">
+						</div> 
+						<div class="back">
+							<img class="img-cover" src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43">
+						</div> 
+					</div>
+					<div class="songs-list-widget" id="card">
+						<ul class="songs-list">
+						</ul>
+					</div>
+					<div class="header hidden">
+						<div class="btn-play"></div>
+						<div class="metadata">
+						  <p class="title"></p>
+						  <p class="author"></p>
+						  <div class="seekbar">
+						    <progress value="0" max="30"></progress>
+						  </div>
+						</div>
+					</div>
+					<audio src="https://p.scdn.co/mp3-preview/8e9c5ffdc38e91659bfe8b6bd44650dfc25a3d31" class="js-player"></audio>
+				</div>
+			</div>
+			<div class="col-8 hidden section-artist">
+				<div class="artist-info clearfix">
+					<div class="col-8">
+						<div class="artist-header">
+							<h2 class="margin-bottom"></h2>
+							<h4><small></small></h4>
+						</div>
+						<div class="artist-body">
+							<div class="div-popularity">
+								<h1 class="popularity"></h1><h1 class="icon"><i class="fa star fa-star" aria-hidden="true"></i></h1>
+							</div>
+							<div class="div-followers">
+								<h4 class="followers"></h4><h4 class="icon"><i class="fa fa-users" aria-hidden="true"></i></h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<div class="artist-header">
+							<img class="img-artist" src="unknown.jpg" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="albums padding-10">
+					<div class="bxslider">
+					</div>
+				</div>
+			</div>
+			
+		</main>
+	<script src="spotify.js"></script>
+</body>
+</html>
